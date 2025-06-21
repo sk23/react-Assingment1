@@ -10,6 +10,9 @@ function App() {
  const[isHidden, setIsHidden] = useState(true)
  const[seleted, setSeleted] = useState("delivery")
 
+
+
+ 
  function toggleInput(){
   setIsHidden(!isHidden)
  }
@@ -217,8 +220,8 @@ function App() {
 
           </div>
         </div>
-        <div className='absolute top-41  right-30 '>
-          <img className='w-full' src="ImageFood (1).png" alt="" />
+        <div className='absolute top-41  right-30 mt-8 lg:mt-0 lg:ml-10 '>
+          <img className='w-full hidden lg:block' src="ImageFood (1).png" alt="" />
         </div>
 
 
