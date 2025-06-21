@@ -5,7 +5,15 @@ import WorkCards from './components/workCards'
 import ItemsCards from './components/itemsCards'
 import FeaturedCards from './components/FeaturedCards'
 import ByfoodCards from './components/ByfoodCards'
+import { useState } from 'react'
 function App() {
+ const[isHidden, setIsHidden] = useState(true)
+ const[seleted, setSeleted] = useState("delivery")
+
+ function toggleInput(){
+  setIsHidden(!isHidden)
+ }
+
 
   const Itams = [
     {
@@ -154,13 +162,13 @@ function App() {
   return (
     <>
       <header className='bg-red- h-15 flex flex-row  items-center' >
-        <div className='container mx-auto flex flex-row justify-between items-center px-30'>
-          <a className='flex flex-row items-center' href="#">
-            < img className='pr-2' src="Mask Group.png" alt="" />
+        <div className='container mx-auto flex flex-row justify-between items-center px-30 realative'>
+          <a className='flex flex-row items-center' href="https://react-assingment1-smdz-rbosdej8j-saraths-projects-7989288e.vercel.app/">
+            < img className='pr-2 w-6' src="Mask Group.png" alt="" />
             <span className='text-red-500 font-black'>food</span>
             <span className='text-yellow-500 font-black'>WaGon</span>
           </a>
-          <span className='flex flex-row items-center text-xs gap-1'>
+          <span className='flex flex-row items-center text-xs gap-1 '>
             <span className=' font-bold ' >
               Deliver to:
             </span>
@@ -171,9 +179,12 @@ function App() {
               Current Location <span className='font-bold'> Mohammadpur Bus Stand, Dhaka</span>
             </span>
           </span>
-          <span className='flex flex-row items-center gap-2'>
-            <span><img className='w-3' src="Search.png" alt="" /></span>
-            <input type="text" className='hidden' placeholder='search' />
+          <span className=' flex flex-row items-center gap-2 realative'>
+            <span onClick={toggleInput} className='cursor-pointer' ><img className='w-3' src="Search.png" alt="" /></span>
+            <span className='absolute left-275'>
+            <input type="text" className={isHidden ? "hidden" : ""} placeholder='search' />
+
+            </span>
             <span className='text-xs font-bold'>Search Food</span>
             <button className='bg-white shadow-[0_4px_5px_0_yellow] flex flex-row items-center justify-center w-20 h-8 text-xs gap-2 rounded-sm'>
               <span><img className='w-3' src="login.png" alt="" /></span>Login
@@ -190,8 +201,10 @@ function App() {
             <p>Within a few clicks, find meals that are accessible near you</p>
             <div>
               <section className='w-125 h-12 bg-white flex flex-row items-center px-4 rounded-sm ' >
-                <button className='flex flex-row bg-red-100 items-center justify-center rounded-sm text-xs w-25 h-8 gap-2' ><img src="IconBick.png" alt="" />Delivery</button>
-                <button className='flex flex-row  items-center justify-center rounded-sm text-xs w-25 h-8 gap-2' ><img src="IconPickup (1).png" alt="" />Pickup</button>
+                <button onClick={() =>setSeleted("delivery")} className={`flex flex-row items-center justify-center rounded-sm text-xs w-25 h-8 gap-2 ${seleted ==="delivery" ? "bg-red-100":""}`}>
+                  <img src="IconBick.png" alt="" />Delivery</button>
+                <button onClick={() =>setSeleted("pickup")} className={`flex flex-row items-center justify-center rounded-sm text-xs w-25 h-8 gap-2 ${seleted === "pickup" ? "bg-red-100" : ""}`}>
+                  <img src="IconPickup (1).png" alt="" />Pickup</button>
               </section>
               <section className='w-125 h-15 bg-white flex flex-row items-center px-4 gap-2 rounded-sm border-t-1 ' >
                 <img className='w-4 absolute ps-2' src="LocationIconRed (2).png" alt="" /><input className='bg-red-100 w-90 ps-6' type="text" placeholder='Enter Your Address' />
@@ -204,8 +217,8 @@ function App() {
 
           </div>
         </div>
-        <div className='absolute top-27 right-30 '>
-          <img className='' src="ImageFood (1).png" alt="" />
+        <div className='absolute top-41  right-30 '>
+          <img className='w-full' src="ImageFood (1).png" alt="" />
         </div>
 
 
@@ -218,7 +231,7 @@ function App() {
 
         </div>
         <div className="bg-yellow-50">
-          <h1 className='px-155 text-2xl font-bold mb-2 text-orange-500'>How does it work</h1>
+          <h1 className='flex justify-center items-center text-2xl font-bold text-orange-500'>How does it work</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 p-6 px-70 ">
 
             < WorkCards title="Select location" para="Choose the location where your food will be delivered." img="Map Marker.png" />
@@ -230,10 +243,10 @@ function App() {
           </div>
         </div>
         <div>
-          <h1 className='px-160 text-2xl font-bold mb-2'>Popular items</h1>
+          <h1 className='flex justify-center items-center font-bold text-2xl '>Popular items</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 p-6 px-45 ">
             <div className=' flex items-center justify-center'>
-              <button className='bg-yellow-500 flex items-center justify-center w-12 h-12 text-xs gap-2 rounded-3xl ' >< img className='h-5' src="LeftIcon.png" alt="" /></button>
+        <button className='bg-yellow-500 flex items-center justify-center w-12 h-12 text-xs gap-2 rounded-3xl ' >< img className='h-5' src="LeftIcon.png" alt="" /></button>
 
             </div>
             {
@@ -255,8 +268,8 @@ function App() {
 
           </div>
         </div>
-        <h1 className='px-155 text-2xl font-bold mb-2'>Featured Restaurants</h1>
-        <div className="grid grid-cols-4  grid-rows-2 gap-x-1 gap-y-10 p-6 px-70 ">
+        <h1 className='flex justify-center items-center text-2xl font-bold mb-2'>Featured Restaurants</h1>
+        <div className="grid grid-cols-4  grid-rows-2 gap-x-1 gap-y-9 p-6 px-80">
 
           {
             Featured.map((Featured) => (
@@ -312,8 +325,8 @@ function App() {
 
           </div>
         </div>
-        <div className='bg-yellow-100 px-85 h-150 py-15 relative '>
-          <div class=" bg-white rounded-4xl shadow-md w-[800px] p-15 h-50 ">
+        <div className='bg-yellow-100 px-100 h-150  py-15 relative '>
+          <div class="  bg-white rounded-4xl shadow-md w-[800px] p-15 h-50 ">
             <div class="flex justify-between">
               <span className=' flex items-center space-x-3 border-r border-black pr-3 '>
                 <img className='h-20' src="Icon (7).png" alt="" />
@@ -443,13 +456,13 @@ function App() {
           </div>
         </div>
 
-        <div className='relative '>
+        <div className='relative  '>
           <img src="Image (19).png" alt="" />
-          <div className='absolute right-140 top-15 space-x-2  '>
+          <div className='absolute right-170 top-15 space-x-2  '>
             <h1 className='text-center text-3xl font-extrabold'>Are you ready to order with <br /> the best deals?</h1>
 
           </div>
-          <div className='absolute right-166 top-45'>
+          <div className='absolute right-195 top-45'>
             <button className="mt-6 bg-red-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition">
               PROCEED TO ORDER &gt;
             </button>
@@ -461,110 +474,82 @@ function App() {
 
 
       </main>
-      <footer className='bg-black text-white py-15'>
+     <footer className="bg-black text-white py-12">
+  <div className="max-w-6xl mx-auto px-4">
+    <h3 className="text-lg mb-6">Our top cities</h3>
+    <div className="grid grid-cols-5 text-xs gap-y-3">
+      {[
+        "San Francisco", "Los Angeles", "New York City", "Chicago", "Miami",
+        "Orange County", "New Mexico", "San Diego", "Seattle", "Las Vegas",
+        "Albuquerque", "East Bay", "Portland", "Charlotte", "Sacramento",
+        "Sacramento", "Long Beach", "Nashville", "Oklahoma City", "New Orleans"
+      ].map(city => (
+        <a href="#" key={city}>{city}</a>
+      ))}
+    </div>
+  </div>
+         <div className="border-t border-gray-700 my-10" />
+  <div className="max-w-6xl mx-auto px-4 flex flex-wrap justify-between gap-10">
+    <div className="grid grid-cols-3 gap-12 text-sm">
+      <div>
+        <h3 className="font-semibold mb-3">Company</h3>
+        <ul className="space-y-2 text-xs">
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-3">Contact</h3>
+        <ul className="space-y-2 text-xs">
+          <li><a href="#">Help & Support</a></li>
+          <li><a href="#">Partner with us</a></li>
+          <li><a href="#">Ride with us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-3">Legal</h3>
+        <ul className="space-y-2 text-xs">
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Refund & Cancellation</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div className="flex flex-col gap-4 text-sm">
+      <h3 className="font-bold">FOLLOW US</h3>
+      <div className="flex gap-4">
+        <img src="1.png" alt="Icon1" className="w-5" />
+        <img src="2.png" alt="Icon2" className="w-5" />
+        <img src="3.png" alt="Icon3" className="w-5" />
+      </div>
 
+      <p className="text-xs mt-4">Receive exclusive offers in your mailbox</p>
+      <div className="relative">
+        <input type="email" placeholder="Enter your email"
+          className="w-full bg-gray-600 placeholder-white text-sm py-2 px-4 rounded" />
+        <img src="envelope.png" alt="" className="w-4 absolute top-2.5 right-3" />
+      </div>
 
-        <h3 className='pl-49 text-lg'>Our top cities</h3>
+      <button className="mt-4 bg-yellow-500 text-white font-semibold py-2 rounded">
+        Subscribe
+      </button>
+    </div>
+  </div>
 
-        <div class=" py-8  text-xs max-w-6xl mx-auto px-4 grid grid-cols-5 gap-2 ">
-
-          <a href="#">San Francisco</a>
-          <a href="#">Los Angeles</a>
-          <a href="#"> New York City</a>
-          <a href="#">Chicago</a>
-          <a href="#">Miami</a>
-          <a href="#"> Orange County</a>
-          <a href="#">New Mexico</a>
-          <a href="#">San Diego</a>
-          <a href="#">Seattle</a>
-          <a href="#">Las Vegas</a>
-          <a href="#">Albuquerque</a>
-          <a href="#">East Bay</a>
-          <a href="#">Portland</a>
-          <a href="#">Charlotte</a>
-          <a href="#">Sacramento</a>
-          <a href="#">Sacramento</a>
-          <a href="#">Long Beach</a>
-          <a href="#">Nashville</a>
-          <a href="#">Oklahoma City</a>
-          <a href="#">New Orleans</a>
-        </div>
-
-        <div className='border-y-1 flex justify-between' >
-          <div>
-            <div className='grid grid-cols-3 gap-2 py-8 pl-49 max-w-2xl ' >
-              <h3 className='text-lg'>Company</h3>
-              <h3 className='text-lg'>Contact</h3>
-              <h3 className='text-lg'>Legal</h3>
-
-            </div>
-            <div className='grid grid-cols-3 gap-2 py-8 pl-49 max-w-2xl text-xs '>
-              <a href="#">About us</a>
-              <a href="#">Help & Support</a>
-              <a href="#">Terms & Conditions</a>
-              <a href="#">Team</a>
-              <a href="#">Partner with us </a>
-              <a href="#">Refund & Cancellation</a>
-              <a href="#">Careers</a>
-              <a href="#">Ride with us</a>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Blog</a>
-              <a href="#"></a>
-              <a href="#">Cookie Policy</a>
-            </div>
-          </div>
-          <div className='flex flex-col pr-143 py-8 '>
-            <h3 className='text-sm font-bold'>FOLLW US</h3>
-            <section className='flex flex-row  gap-5 py-5'>
-              <a href="#">
-                <img src="1.png" alt="" />
-              </a>
-              <a href="#">
-                <img src="2.png" alt="" />
-              </a>
-              <a href="#">
-                <img src="3.png" alt="" />
-              </a>
-            </section>
-            <div className='flex flex-col'>
-              <div className='realative '>
-                <p>Receive exclusive offers in your mailbox</p>
-                <div className='bg-[#999999] h-10 text-center py-2 '>
-                  <input type="email" placeholder='Enter Your email' />
-                </div>
-                <div className='absolute right-204 top-1234'>
-                  <img className=' w-5' src="envelope.png" alt="" />
-
-                </div>
-              </div>
-              <button className="mt-6 bg-yellow-500 text-white font-semibold py-3 px-6 rounded-lg w-">
-                Subscribe
-              </button>
-
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className='flex items-center justify-between ...  space-x-2 text-white'>
-            <section>
-              <a href="#" class="flex items-center space-x-2 text-white">
-                <p className='text-xs'>All rights reserved </p>
-                <img src="Symbol.png" alt="©" class="w-4 h-4" />
-
-                <p className='text-xs' >  Your Company, 2021</p>
-              </a>
-            </section>
-            <section>
-              <a href="#" class="flex items-center space-x-2 text-white">
-                <p className='text-xs'>Made with &#128155; </p>
-
-                <p className='text-xs' > by Themewagon</p>
-              </a>
-            </section>
-          </div>
-
-        </div>
-
+  <div className="border-t border-gray-700 mt-10 pt-6 px-4 flex flex-col md:flex-row justify-between max-w-6xl mx-auto text-xs">
+    <div className="flex items-center gap-2">
+      <p>All rights reserved</p>
+      <img src="Symbol.png" alt="©" className="w-4 h-4" />
+      <p>Your Company, 2021</p>
+    </div>
+    <div className="flex items-center gap-2 mt-3 md:mt-0">
+      <p>Made with 💛</p>
+      <p>by Themewagon</p>
+    </div>
+  </div>
 
 
 

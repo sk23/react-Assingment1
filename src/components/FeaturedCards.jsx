@@ -1,5 +1,6 @@
 function FeaturedCards(props){
     console.log(props)
+    const isOpen = props.para === "Opans Now";
 return(
   <div className="bg-white rounded-xl overflow-hidden shadow-md w-55 h-67 ">
     <div className="relative">
@@ -20,9 +21,10 @@ return(
       <span className="text-yellow-400"> &#9733;{props.rating}</span>
 
         </div>
-    </div>
-      <p className="px-3 py-1 bg-red-100 h-8  text-sm rounded-lg">
-       {props.para}
+    </div >
+    
+      <p className={` px-6 py-1 h-8 w-40   text-sm rounded-lg ${isOpen ? "bg-green-200" : "bg-red-200"} `}>
+       {isOpen ? "Opans Now" : "Opans tomorrow" }
       </p>
   </div>
     
